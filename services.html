@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - Luxury Hotel</title>
+  <link rel="icon" href="public/logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .page-hero {
+      height:55vh; min-height:400px; position:relative; overflow:hidden;
+      background:url('public/defaultBcg.jpg') center/cover;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .page-hero::after { content:''; position:absolute; inset:0; background:rgba(0,0,0,.55); }
+    .page-hero-content { position:relative; z-index:1; text-align:center; padding:0 20px; }
+    .page-hero-tag { font-size:.6rem; letter-spacing:.5em; text-transform:uppercase; color:var(--gold-light); margin-bottom:16px; display:block; }
+    .page-hero-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,5rem); font-weight:400; color:var(--white); }
+    .page-hero-title em { font-style:italic; color:var(--gold-light); }
+    .page-hero-sub { font-size:.85rem; letter-spacing:.2em; color:rgba(255,255,255,.6); margin-top:16px; }
+    .services-intro { text-align:center; padding:80px 60px 20px; max-width:800px; margin:0 auto; }
+    .services-intro p { font-size:.9rem; line-height:2; color:var(--grey); }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html"><img src="public/logo.png" alt="Luxury Hotel" class="navbar-logo"></a>
+      <div class="navbar-spacer"></div>
+      <div class="navbar-menu">
+        <a href="index.html">Accueil</a>
+        <a href="chambres.html">Chambres</a>
+        <a href="services.html">Services</a>
+        <a href="contacter-nous.html">Contacter-nous</a>
+      </div>
+      <div class="navbar-spacer"></div>
+      <a class="reserve-btn"><i class="fas fa-phone"></i> Réserver</a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <span class="page-hero-tag">Luxury Hotel</span>
+      <h1 class="page-hero-title">Nos <em>Services</em></h1>
+      <p class="page-hero-sub">Comfort, Élégance, Expérience et des émotions…</p>
+    </div>
+  </div>
+
+  <div class="services-intro reveal">
+    <p>Découvrez nos services exceptionnels, pensés pour vous offrir une expérience hôtelière totale et inoubliable.</p>
+  </div>
+
+  <section class="services-grid" style="margin:40px 60px 0; padding:0;">
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-cocktail"></i></div>
+      <h4><a href="cocktail.html" class="service-link">Cocktail gratuit</a></h4>
+      <p>Un mélange fait par amour de fruits généralement acidulés et sucrés parfois aromatisés avec une liqueur</p>
+    </div>
+    <div class="service-card reveal reveal-d1">
+      <div class="service-icon"><i class="fas fa-hiking"></i></div>
+      <h4><a href="randonnee.html" class="service-link">Randonnée infinie</a></h4>
+      <p>Nous aimons les activités et notre activité c'est de faire de longues balades à la campagne juste pour vous</p>
+    </div>
+    <div class="service-card reveal reveal-d2">
+      <div class="service-icon"><i class="fas fa-swimming-pool"></i></div>
+      <h4><a href="piscine.html" class="service-link">Piscine</a></h4>
+      <p>Trois piscines gratuites pour vous et pour vos enfants pour passer un bon temps, des moniteurs expérimentés…</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-coffee"></i></div>
+      <h4><a href="cafe.html" class="service-link">Café</a></h4>
+      <p>Le café le plus puissant, ce café est venu directement du Brésil à notre charmant hôtel…</p>
+    </div>
+    <div class="service-card reveal reveal-d1">
+      <div class="service-icon"><i class="fas fa-leaf"></i></div>
+      <h4><a href="espace-vert.html" class="service-link">Espace vert</a></h4>
+      <p>Un espace vert avec une belle vue pour que la famille puisse se détendre et passer du bon temps</p>
+    </div>
+    <div class="service-card reveal reveal-d2">
+      <div class="service-icon"><i class="fas fa-horse"></i></div>
+      <h4><a href="equitation.html" class="service-link">Équitation</a></h4>
+      <p>Profitez de beaux sentiers et de l'équitation. Choisissez parmi des promenades relaxantes uniquement</p>
+    </div>
+  </section>
+
+  <div style="margin-bottom:80px;"></div>
+
+   <footer class="footer-bottom2">
+    <span class="footer-copy">© 2026 Luxury Hotel · Tous droits réservés</span>
+    <div class="footer-socials">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function tick(){cur.style.cssText=`left:${mx-4}px;top:${my-4}px;position:fixed;`;rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.cssText=`left:${rx-17}px;top:${ry-17}px;position:fixed;`;requestAnimationFrame(tick);})();
+    window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>10));
+    const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  </script>
+</body>
+</html>

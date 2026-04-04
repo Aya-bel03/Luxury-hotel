@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Hotel · Alger</title>
+  <link rel="icon" href="public/logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+
+    /* Index-specific extras */
+    .hero-eyebrow {
+      display:flex; align-items:center; gap:14px;
+      font-size:.6rem; letter-spacing:.5em; text-transform:uppercase;
+      color:var(--gold-light); margin-bottom:22px;
+      animation:heroFadeUp 1s .3s both;
+    }
+    .hero-eyebrow::before { content:''; width:36px; height:1px; background:var(--gold-light); }
+    .hero-actions {
+      margin-top:44px; display:flex; gap:20px; align-items:center;
+      animation:heroFadeUp 1s 1s both;
+    }
+    .btn-hero-primary {
+      background:var(--white); color:var(--dark);
+      padding:15px 38px; font-family:'Jost',sans-serif;
+      font-size:.65rem; letter-spacing:.3em; text-transform:uppercase;
+      text-decoration:none; font-weight:500; cursor:none;
+      transition:background .3s,color .3s,transform .2s;
+    }
+    .btn-hero-primary:hover { background:var(--gold); color:var(--white); transform:translateY(-2px); }
+    .btn-hero-ghost {
+      border:1px solid rgba(255,255,255,.45); color:rgba(255,255,255,.8);
+      padding:14px 36px; font-size:.65rem; letter-spacing:.3em;
+      text-transform:uppercase; text-decoration:none; cursor:none; transition:all .3s;
+    }
+    .btn-hero-ghost:hover { border-color:var(--gold-light); color:var(--gold-light); }
+
+    /* Hero dots */
+    .hero-dots {
+      position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+      display:flex; gap:8px; z-index:3;
+    }
+    .hero-dot { width:28px; height:2px; background:rgba(255,255,255,.3); cursor:none; transition:all .3s; }
+    .hero-dot.active { background:var(--gold); width:38px; }
+    .scroll-hint {
+      position:absolute; bottom:36px; right:60px;
+      z-index:3; text-align:center; animation:heroFadeUp 1.5s 1.4s both;
+    }
+    .scroll-hint span {
+      display:block; font-size:.5rem; letter-spacing:.4em;
+      text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:10px;
+    }
+    .scroll-line {
+      width:1px; height:50px;
+      background:linear-gradient(to bottom, rgba(255,255,255,.4), transparent);
+      margin:0 auto; animation:scrollDrop 2s infinite;
+    }
+    @keyframes scrollDrop {
+      0%   { transform:scaleY(0); transform-origin:top; }
+      50%  { transform:scaleY(1); transform-origin:top; }
+      51%  { transform:scaleY(1); transform-origin:bottom; }
+      100% { transform:scaleY(0); transform-origin:bottom; }
+    }
+
+    /* Gold band */
+    .gold-band { background:var(--gold); padding:26px 40px;
+      display:flex; align-items:center; justify-content:space-between; gap:32px;
+    }
+
+    .band-item { display:flex; align-items:center; gap:12px; color:var(--white); }
+    .band-item i { font-size:.95rem; opacity:.85; }
+    .band-item span { font-size:.68rem; letter-spacing:.15em; text-transform:uppercase; }
+    .band-sep { width:1px; height:24px; background:rgba(255,255,255,.3); }
+
+    /* Welcome Splits */
+    .welcome-split { display:grid; grid-template-columns:1fr 1fr; min-height:500px; }
+    .welcome-img-side {
+      position:relative; overflow:hidden;
+      background:url('public/Hotel-.jpg') center/cover no-repeat; min-height:350px;
+    }
+    .welcome-img-thumb {
+      position:absolute; bottom:40px; right:-28px;
+      width:210px; height:150px;
+      background:url('public/room-1.jpeg') center/cover no-repeat;
+      border:6px solid var(--white);
+      box-shadow:0 20px 60px rgba(0,0,0,.18);
+    }
+    .welcome-text-side {
+      background:var(--off-white); padding:100px 80px;
+      display:flex; flex-direction:column; justify-content:center;
+    }
+    .tag-line {
+      display:flex; align-items:center; gap:14px;
+      font-size:.6rem; letter-spacing:.5em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:28px;
+    }
+    .tag-line::before { content:''; width:36px; height:1px; background:var(--gold); }
+    .welcome-h2 {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2rem,3.5vw,3.2rem); font-weight:400; line-height:1.2; color:var(--dark);
+    }
+    .welcome-h2 em { font-style:italic; color:var(--gold); }
+    .welcome-body { margin-top:28px; font-size:.9rem; line-height:2; color:var(--grey); }
+    .w-divider { width:60px; height:2px; background:var(--gold); margin:32px 0; }
+    .welcome-feats { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:40px; }
+    .feat-item { display:flex; align-items:flex-start; gap:12px; }
+    .feat-item i { color:var(--gold); font-size:.8rem; margin-top:4px; }
+    .feat-item span { font-size:.8rem; line-height:1.7; color:#555; }
+    .btn-gold {
+      display:inline-block; background:var(--gold); color:var(--white);
+      padding:16px 40px; font-family:'Jost',sans-serif;
+      font-size:.65rem; letter-spacing:.3em; text-transform:uppercase;
+      text-decoration:none; font-weight:400; cursor:none; align-self:flex-start;
+      transition:background .3s,transform .2s;
+    }
+    .btn-gold:hover { background:var(--dark); transform:translateY(-2px); }
+
+     /* Rooms teaser */
+    .rooms-teaser { padding:120px 60px; background:var(--white); }
+    .section-header {
+      max-width:1300px; margin:0 auto 70px;
+      display:flex; align-items:flex-end; justify-content:space-between;
+    }
+    .section-tag {
+      font-size:.6rem; letter-spacing:.5em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:5px;
+      display:flex; align-items:center; gap:12px;
+    }
+    .section-tag::before { content:''; width:30px; height:1px; background:var(--gold); }
+    .section-title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,3vw,2.8rem); font-weight:200; color:var(--dark);
+    }
+    .section-title em { font-style:italic; color:var(--gold); }
+    .section-link {
+      font-size:.65rem; letter-spacing:.25em; text-transform:uppercase;
+      color:var(--gold); text-decoration:none;
+      display:flex; align-items:center; gap:10px;
+      transition:gap .3s; cursor:none;
+    }
+    .section-link:hover { gap:16px; }
+    .rooms-teaser-grid {
+      max-width:1300px; margin:0 auto;
+      display:grid; grid-template-columns:1fr 1fr 1fr;
+      gap:16px; height: 370px;
+    }
+    .rt-card { position:relative; overflow:hidden; cursor:none; }
+    .rt-bg {
+      width:100%; height:100%;
+      background-size:cover; background-position:center;
+      transition:transform .7s ease;
+    }
+    .rt-card:hover .rt-bg { transform:scale(1.06); }
+    .rt-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.04) 55%);
+    }
+    .rt-info { position:absolute; bottom:0; left:0; right:0; padding:28px; }
+    .rt-type { font-size:.55rem; letter-spacing:.45em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px; }
+    .rt-name { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--white); font-weight:400; }
+    .rt-price { font-size:.7rem; color:rgba(255,255,255,.55); margin-top:2px; }
+    .rt-arrow {
+      position:absolute; top:24px; right:24px;
+      width:38px; height:38px; background:rgba(255,255,255,.15);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--white); font-size:.75rem;
+      opacity:0; transform:translateY(6px);
+      transition:all .3s; backdrop-filter:blur(4px);
+    }
+    .rt-card:hover .rt-arrow { opacity:1; transform:translateY(0); }
+
+     /* CTA banner */
+    .cta-banner {
+      position:relative; overflow:hidden; min-height:480px;
+      display:flex; align-items:center; justify-content:center; text-align:center;
+    }
+    .cta-bg { position:absolute; inset:0; background:url('public/room-9.jpeg') center/cover; }
+    .cta-bg::after { content:''; position:absolute; inset:0; background:rgba(0,0,0,.65); }
+    .cta-content { position:relative; z-index:2; padding:60px 20px; }
+    .cta-tag { font-size:.6rem; letter-spacing:.5em; text-transform:uppercase; color:var(--gold-light); margin-bottom:6px; display:block; }
+    .cta-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,5vw,4.5rem); font-weight:400; color:var(--white); line-height:1.1; }
+    .cta-title em { font-style:italic; color:var(--gold-light); }
+    .cta-phone { margin-top:40px; font-family:'Playfair Display',serif; font-size:2rem; color:var(--white); letter-spacing:.08em; }
+    .cta-phone i { color:var(--gold-light); margin-right:14px; font-size:1.3rem; }
+    .cta-sub { margin-top:10px; font-size:.65rem; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.4); }
+    .footer-big {
+      background:var(--dark); padding:70px 60px;
+      display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:60px;
+    }
+
+    /* Big footer */
+    .footer-logo-txt { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--white); letter-spacing:.15em; }
+    .footer-tagline { font-size:.75rem; line-height:1.9; color:rgba(255,255,255,.3); margin-top:16px; }
+    .footer-col-title { font-size:.6rem; letter-spacing:.4em; text-transform:uppercase; color:var(--gold); margin-bottom:24px; }
+    .footer-col-link { display:block; margin-bottom:12px; font-size:.75rem; color:rgba(255,255,255,.4); text-decoration:none; transition:color .3s; letter-spacing:.05em; }
+    .footer-col-link:hover { color:var(--white); }
+    .footer-bottom2 { background:#141414; padding:22px 60px; display:flex; align-items:center; justify-content:space-between; }
+    .footer-copy { font-size:.6rem; color:rgba(255,255,255,.6); letter-spacing:.17em; }
+    .footer-socials { display:flex; gap:14px; }
+    .footer-socials a {
+      width:36px; height:36px; border:1px solid rgba(255,255,255,.3);
+      display:flex; align-items:center; justify-content:center;
+      color:rgba(255,255,255,.4); font-size:.75rem;
+      text-decoration:none; transition:all .3s;
+    }
+    .footer-socials a:hover { border-color:var(--gold); color:var(--gold); }
+    @media(max-width:900px) {
+      .gold-band { flex-wrap:wrap; padding:20px 24px; gap:16px; }
+      .band-sep { display:none; }
+      .welcome-split { grid-template-columns:1fr; }
+      .welcome-img-side { height:400px; }
+      .welcome-img-thumb { display:none; }
+      .welcome-text-side { padding:60px 28px; }
+      .rooms-teaser { padding:80px 24px; }
+      .rooms-teaser-grid { grid-template-columns:1fr; height:auto; }
+      .rt-card { height:280px; }
+      .footer-big { grid-template-columns:1fr 1fr; padding:44px 24px; gap:36px; }
+      .footer-bottom2 { gap:14px; padding:18px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html"><img src="public/logo.png" alt="Luxury Hotel" class="navbar-logo"></a>
+      <div class="navbar-spacer"></div>
+      <div class="navbar-menu">
+        <a href="index.html">Accueil</a>
+        <a href="chambres.html">Chambres</a>
+        <a href="services.html">Services</a>
+        <a href="contacter-nous.html">Contacter-nous</a>
+      </div>
+      <div class="navbar-spacer"></div>
+      <a class="reserve-btn"><i class="fas fa-phone"></i> Réserver</a>
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <div class="hero-slider">
+      <div class="hero-slide active" style="background-image:url('public/defaultBcg.jpg')">
+        <div class="hero-content">
+          <div class="hero-eyebrow">Alger · Algérie · 5 Étoiles</div>
+          <h1>Luxury<br><em>Hotel</em></h1>
+          <p>En toute sécurité</p>
+          <p>Un séjour élégant, confortable et inoubliable</p>
+        </div>
+      </div>
+      <div class="hero-slide" style="background-image:url('public/brownRoom.jpg')">
+        <div class="hero-content">
+          <div class="hero-eyebrow">Alger · Algérie · 5 Étoiles</div>
+          <h1>Luxury<br><em>Hotel</em></h1>
+          <p>En toute sécurité</p>
+          <p>Un séjour élégant, confortable et inoubliable</p>
+        </div>
+      </div>
+      <div class="hero-slide" style="background-image:url('public/room-3.jpeg')">
+        <div class="hero-content">
+          <div class="hero-eyebrow">Alger · Algérie · 5 Étoiles</div>
+          <h1>Luxury<br><em>Hotel</em></h1>
+          <p>En toute sécurité</p>
+          <p>Un séjour élégant, confortable et inoubliable</p>
+        </div>
+      </div>
+    </div>
+    <button class="hero-nav prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="hero-nav next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+    <div class="hero-dots" id="heroDots">
+      <div class="hero-dot active"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <div class="gold-band">
+    <div class="band-item"><i class="fas fa-wifi"></i><span>Wi-Fi Gratuit</span></div>
+    <div class="band-sep"></div>
+    <div class="band-item"><i class="fas fa-concierge-bell"></i><span>Service 24h/24</span></div>
+    <div class="band-sep"></div>
+    <div class="band-item"><i class="fas fa-utensils"></i><span>Restaurant Gastronomique</span></div>
+    <div class="band-sep"></div>
+    <div class="band-item"><i class="fas fa-spa"></i><span>Spa &amp; Bien-être</span></div>
+    <div class="band-sep"></div>
+    <div class="band-item"><i class="fas fa-car"></i><span>Parking Privé</span></div>
+  </div>
+
+ <section class="welcome-split">
+    <div class="welcome-img-side delay-3"> <!-- L'image arrive en 3ème -->
+      <div class="welcome-img-thumb"></div>
+    </div>
+    
+    <div class="welcome-text-side">
+      <div class="tag-line delay-1">Bienvenue</div>
+      <h2 class="welcome-h2 delay-1">Au cœur d'Alger,<br><em>vivez l'exception</em></h2>
+      <p class="welcome-body delay-2">Bienvenue à Alger, bienvenue à Luxury Hotel. Au cœur d'Alger, vivez un séjour incomparable et authentique. Moderne, chaleureux et raffiné, Luxury Hotel est un havre de détente. Découvrez un large éventail d'activités et vivez une expérience hôtelière totale.</p>
+      <div class="w-divider"></div>
+      <div class="welcome-feats">
+        <div class="feat-item delay-4"><i class="fas fa-check"></i><span>Chambres luxueuses</span></div>
+        <div class="feat-item delay-4"><i class="fas fa-check"></i><span>Cuisine gastronomique</span></div>
+        <div class="feat-item delay-4"><i class="fas fa-check"></i><span>Spa & Bien-être</span></div>
+        <div class="feat-item delay-4"><i class="fas fa-check"></i><span>Piscine rooftop</span></div>
+      </div>
+      
+      <a href="services.html" class="btn-gold delay-4">Découvrir nos services</a>
+    </div>
+</section>
+
+  <section class="stats-section">
+    <p class="stats-intro">Vous êtes entre de bonnes mains.</p>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-info">
+          <div class="stat-label">Staff</div>
+          <div class="stat-number" data-target="621">0</div>
+        </div>
+      </div>
+      <div class="stat-card reveal reveal-d1">
+        <div class="stat-info">
+          <div class="stat-label">Chambres</div>
+          <div class="stat-number" data-target="1900">0</div>
+        </div>
+      </div>
+      <div class="stat-card reveal reveal-d2">
+        <div class="stat-info">
+          <div class="stat-label">Locations</div>
+          <div class="stat-number" data-target="7">0</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rooms-teaser">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-tag">Hébergements</div>
+        <h2 class="section-title">Chambres &amp; <em>Suites</em></h2>
+      </div>
+    </div>
+    <div class="rooms-teaser-grid reveal">
+      <div class="rt-card">
+        <div class="rt-bg" style="background:url('public/brownRoom.jpg') center/cover; height:100%;"></div>
+        <div class="rt-overlay"></div>
+        <div class="rt-info"><div class="rt-type">Premium</div><div class="rt-name">Suite Présidentielle</div><div class="rt-price">À partir de 15 000 DZD/nuit</div></div>
+        <div class="rt-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="rt-card">
+        <div class="rt-bg" style="background:url('public/room-7.jpeg') center/cover; height:100%;"></div>
+        <div class="rt-overlay"></div>
+        <div class="rt-info"><div class="rt-type">Double</div><div class="rt-name">Chambre Double</div><div class="rt-price">À partir de 8 500 DZD/nuit</div></div>
+        <div class="rt-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="rt-card">
+        <div class="rt-bg" style="background:url('public/room-1.jpeg') center/cover; height:100%;"></div>
+        <div class="rt-overlay"></div>
+        <div class="rt-info"><div class="rt-type">Simple</div><div class="rt-name">Chambre Simple</div><div class="rt-price">À partir de 5 000 DZD/nuit</div></div>
+        <div class="rt-arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+    </div>
+    <div style="max-width:1300px; margin:20px auto 0;">
+      <a href="chambres.html" class="btn-gold">Découvrir nos chambres</a>
+    </div>
+  </section>
+
+  <section class="page-header">
+    <h2>Les gens nous aiment</h2>
+    <h3>Vous êtes en bonne compagnie</h3>
+    <p>Découvrez pourquoi plus de 12 000 personnes séjournent dans notre hôtel avec le sourire aux lèvres.</p>
+  </section>
+
+  <section class="testimonials-grid">
+  <div class="testimonial-card">
+    <span class="testimonial-quote"><i class="fas fa-quote-left"></i></span>
+    <img src="public/room-1.jpeg" alt="Mohamed" class="testimonial-avatar">
+    <span class="testimonial-stars">★★★★★</span>
+    <p class="testimonial-text">J'ai séjourné dans une douzaine d'hôtels à Alger. Celui-ci était en haut de la liste des meilleurs séjours jamais vécus.</p>
+    <div class="testimonial-footer">
+      <span class="testimonial-name">Mohamed</span>
+      <span class="testimonial-date">Décembre 2025</span>
+    </div>
+  </div>
+  <div class="testimonial-card">
+    <span class="testimonial-quote"><i class="fas fa-quote-left"></i></span>
+          <img src="public/room-1.jpeg" alt="Amine" class="testimonial-avatar">
+    <span class="testimonial-stars">★★★★★</span>
+    <p class="testimonial-text">Le personnel de cette propriété est formidable ! Ils font tout leur possible pour rendre votre séjour confortable.</p>
+    <div class="testimonial-footer">
+      <span class="testimonial-name">Amine</span>
+      <span class="testimonial-date">Novembre 2025</span>
+    </div>
+  </div>
+  <div class="testimonial-card">
+    <span class="testimonial-quote"><i class="fas fa-quote-left"></i></span>
+   <img src="public/room-1.jpeg" alt="Aya" class="testimonial-avatar">
+    <span class="testimonial-stars">★★★★</span>
+    <p class="testimonial-text">Les chambres étaient propres, très confortables, et le personnel était formidable.</p>
+    <div class="testimonial-footer">
+      <span class="testimonial-name">Aya</span>
+      <span class="testimonial-date">Décembre 2024</span>
+    </div>
+  </div>
+</section>
+
+  <section class="cta-banner">
+    <div class="cta-bg"></div>
+    <div class="cta-content reveal">
+      <span class="cta-tag">Réservation Directe</span>
+      <h2 class="cta-title">Votre séjour de rêve<br><em>commence ici</em></h2>
+      <div class="cta-phone"><i class="fas fa-phone"></i>+213 000 000 000</div>
+      <p class="cta-sub">Disponible 24h/24 · 7j/7</p>
+    </div>
+  </section>
+
+  <footer class="footer-big">
+    <div>
+      <div class="footer-logo-txt">Luxury Hotel</div>
+      <p class="footer-tagline">Votre havre d'élégance et de confort au cœur d'Alger. Une expérience hôtelière authentique et incomparable.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <a href="index.html" class="footer-col-link">Accueil</a>
+      <a href="services.html" class="footer-col-link">Services</a>
+      <a href="chambres.html" class="footer-col-link">Chambres</a>
+      <a href="contacter-nous.html" class="footer-col-link">Contacter-nous</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <a href="cocktail.html" class="footer-col-link">Cocktail gratuit</a>
+      <a href="piscine.html" class="footer-col-link">Piscine</a>
+      <a href="randonnee.html" class="footer-col-link">Randonnée</a>
+      <a href="equitation.html" class="footer-col-link">Équitation</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <a href="#" class="footer-col-link">Alger, Algérie</a>
+      <a href="#" class="footer-col-link">+213 000 000 000</a>
+      <a href="#" class="footer-col-link"><span class="__cf_email__" data-cfemail="c18db4b9b4b3b8efa9aeb5a4ad81a6aca0a8adefa2aeac">[email&#160;protected]</span></a>
+    </div>
+  </footer>
+  <div class="footer-bottom2">
+    <span class="footer-copy">© 2026 Luxury Hotel · Tous droits réservés</span>
+    <div class="footer-socials">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // ── CURSOR ──
+    const cur=document.getElementById('cursor'), ring=document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function tick(){
+      cur.style.cssText=`left:${mx-4}px;top:${my-4}px;position:fixed;`;
+      rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+      ring.style.cssText=`left:${rx-17}px;top:${ry-17}px;position:fixed;`;
+      requestAnimationFrame(tick);
+    })();
+    document.querySelectorAll('a,button,.rt-card,.testimonial-card,.service-card').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ring.style.transform='scale(1.8)';ring.style.opacity='.8';});
+      el.addEventListener('mouseleave',()=>{ring.style.transform='scale(1)';ring.style.opacity='.5';});
+    });
+
+    // ── NAVBAR SCROLL ──
+    window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>60));
+
+    // ── HERO SLIDER ──
+    let slide=0;
+    const slides=document.querySelectorAll('.hero-slide'),dots=document.querySelectorAll('.hero-dot');
+    function goSlide(n){
+      slides[slide].classList.remove('active');
+      dots[slide].classList.remove('active');
+      slide=(n+slides.length)%slides.length;
+      slides[slide].classList.add('active');
+      dots[slide].classList.add('active');
+    }
+    function changeSlide(d){goSlide(slide+d);}
+    setInterval(()=>goSlide(slide+1),5500);
+    dots.forEach((d,i)=>d.addEventListener('click',()=>goSlide(i)));
+
+    // ── REVEAL ON SCROLL ──
+    const obs=new IntersectionObserver(e=>e.forEach(x=>{
+      if(x.isIntersecting) x.target.classList.add('visible');
+    }),{threshold:0});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    // ── TESTIMONIALS ANIMATION ──
+    const tObs=new IntersectionObserver(e=>e.forEach(x=>{
+      if(x.isIntersecting) x.target.classList.add('visible');
+    }),{threshold:0.15});
+    document.querySelectorAll('.testimonial-card').forEach(el=>tObs.observe(el));
+
+    // ── COUNTERS ──
+    function counter(el,t){
+      let s,d=2200;
+      requestAnimationFrame(function step(ts){
+        if(!s)s=ts;
+        const p=Math.min((ts-s)/d,1);
+        el.textContent=Math.floor((1-Math.pow(1-p,3))*t).toLocaleString('fr-FR');
+        if(p<1)requestAnimationFrame(step);
+      });
+    }
+    const co=new IntersectionObserver(e=>e.forEach(x=>{
+      if(x.isIntersecting){counter(x.target,+x.target.dataset.target);co.unobserve(x.target);}
+    }),{threshold:.5});
+    document.querySelectorAll('.stat-number[data-target]').forEach(el=>co.observe(el));
+
+    // ── ROOMS CARDS ANIMATION ──
+    const roomObs=new IntersectionObserver(e=>e.forEach(x=>{
+      if(x.isIntersecting) x.target.classList.add('appear');
+    }),{threshold:0.2});
+    document.querySelectorAll('.rt-card').forEach((el,i)=>{
+      el.style.transitionDelay=i*0.1+'s';
+      roomObs.observe(el);
+    });
+
+    // ── PARALLAX SCROLL ──
+    window.addEventListener('scroll',()=>{
+      const p=document.querySelector('.parallax-section');
+      if(p) p.style.backgroundPositionY=scrollY*.3+'px';
+    });
+
+    // ── GOLD BAND STICKY HIDE ON SCROLL UP ──
+    let lastY=0;
+    const band=document.querySelector('.gold-band');
+    window.addEventListener('scroll',()=>{
+      if(!band)return;
+      const curr=window.scrollY;
+      band.style.opacity=curr>100?'1':'1';
+      lastY=curr;
+    });
+
+    // ── REVEAL ON SCROLL ──
+    const revealElements = document.querySelectorAll('.tag-line, .welcome-h2, .welcome-body, .welcome-img-side, .feat-item, .btn-gold');
+
+    const revealOnScroll = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-active');
+        }
+    });
+}, { threshold: 0.15 }); // Déclenche quand 15% de l'élément est visible
+
+   revealElements.forEach(el => revealOnScroll.observe(el));
+  </script>
+</body>
+</html>

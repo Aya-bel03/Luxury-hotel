@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chambres - Luxury Hotel</title>
+  <link rel="icon" href="public/logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .page-hero {
+      height:55vh; min-height:400px; position:relative; overflow:hidden;
+      background:url('public/room-3.jpeg') center/cover;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .page-hero::after { content:''; position:absolute; inset:0; background:rgba(0,0,0,.52); }
+    .page-hero-content { position:relative; z-index:1; text-align:center; padding:0 20px; }
+    .page-hero-tag { font-size:.6rem; letter-spacing:.5em; text-transform:uppercase; color:var(--gold-light); margin-bottom:16px; display:block; }
+    .page-hero-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,6vw,5rem); font-weight:400; color:var(--white); }
+    .page-hero-title em { font-style:italic; color:var(--gold-light); }
+    .page-hero-sub { font-size:.85rem; letter-spacing:.15em; color:rgba(255,255,255,.6); margin-top:16px; font-style:italic; font-family:'Playfair Display',serif; }
+
+    /* Room items use grid layout */
+    .rooms-section { background:var(--white); }
+    .room-item {
+      display:grid; grid-template-columns:1fr 1fr;
+      min-height:300px; overflow:hidden;
+    }
+    .room-item.reverse .room-image-wrap { order:2; }
+    .room-item.reverse .room-content   { order:1; }
+    .room-image-wrap { overflow:hidden; }
+    .room-image { width:90%; height:90%; object-fit:cover; display:block; transition:transform .7s ease; }
+    .room-item:hover .room-image { transform:scale(1.04); }
+    .room-content {
+      background:var(--off-white); padding:80px 70px;
+      display:flex; flex-direction:column; justify-content:center;
+    }
+    .room-badge {
+      display:inline-block; font-size:.50rem; letter-spacing:.45em;
+      text-transform:uppercase; color:var(--gold);
+      border:1px solid var(--gold-pale); padding:6px 16px;
+      margin-bottom:24px; align-self:flex-start;
+    }
+    .room-title {
+      font-family:'Playfair Display',serif;
+      font-size:2.4rem; font-weight:400; color:var(--dark);
+      padding-bottom:20px; margin-bottom:20px; position:relative;
+    }
+    .room-title::after { content:''; position:absolute; bottom:0; left:0; width:40px; height:2px; background:var(--gold); }
+    .room-description { font-size:.9rem; line-height:2; color:var(--grey); margin-bottom:36px; }
+    .room-btn {
+      display:inline-block; background:var(--gold); color:var(--white);
+      padding:14px 36px; font-family:'Jost',sans-serif;
+      font-size:.65rem; letter-spacing:.3em; text-transform:uppercase;
+      text-decoration:none; cursor:none; align-self:flex-start;
+      transition:background .3s, transform .2s;
+    }
+    .room-btn:hover { background:var(--dark); transform:translateY(-2px); }
+
+    @media(max-width:900px){
+      .room-item { grid-template-columns:1fr; }
+      .room-item.reverse .room-image-wrap,.room-item.reverse .room-content { order:unset; }
+      .room-image-wrap { height:300px; }
+      .room-content { padding:44px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html"><img src="public/logo.png" alt="Luxury Hotel" class="navbar-logo"></a>
+      <div class="navbar-spacer"></div>
+      <div class="navbar-menu">
+         <a href="index.html">Accueil</a>
+        <a href="chambres.html">Chambres</a>
+        <a href="services.html">Services</a>
+        <a href="contacter-nous.html">Contacter-nous</a>
+      </div>
+      <div class="navbar-spacer"></div>
+      <a class="reserve-btn"><i class="fas fa-phone"></i> Réserver</a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <span class="page-hero-tag">Luxury Hotel</span>
+      <h1 class="page-hero-title">Nos <em>Chambres</em></h1>
+      <p class="page-hero-sub">Içi, vous êtes le patron…</p>
+    </div>
+  </div>
+
+  <div class="page-header reveal" style="padding-bottom:0;">
+    <p>Spacieuses et décorées avec élégance, découvrez des chambres parées de couleurs riches, propices à la relaxation. Équilibre raffiné du fonctionnel et du confort, les chambres de Luxury Hotel se distinguent par l'accent mis sur le moindre détail.</p>
+  </div>
+
+  <div class="parallax-section">
+    <div class="parallax-text">Bienvenue dans nos chambres</div>
+  </div>
+
+  <h2 class="rooms-intro">Séjour dans une chambre à Alger signé Luxury Hotel</h2>
+
+  <section class="rooms-section">
+
+    <!-- Simple -->
+  <div class="room-item">
+
+  <img src="public/room-1.jpeg" class="room-image">
+
+  <div class="room-content">
+    <span class="room-badge">Chambre</span>
+        <h3 class="room-title">Simple</h3>
+        <p class="room-description">Chambre élégante et confortable idéale pour une personne. Un espace intime et fonctionnel, parfait pour un séjour reposant.</p>
+        <a href="chambre-simple.html" class="room-btn">Découvrir la chambre Simple</a>
+      </div>
+    </div>
+
+
+ <!-- Double -->
+ <div class="room-item reverse">
+
+  <img src="public/room-4.jpeg" class="room-image">
+
+  <div class="room-content">
+    <span class="room-badge">Chambre</span>
+        <h3 class="room-title">Double</h3>
+        <p class="room-description">Chambre spacieuse et confortable parfaite pour deux personnes. Deux chambres élégantes avec une salle de bain partagée.</p>
+        <a href="chambre-double.html" class="room-btn">Découvrir la chambre Double</a>
+      </div>
+    </div>
+
+
+
+  <!-- Premium -->
+  <div class="room-item">
+  <img src="public/room-3.jpeg" class="room-image">
+
+  <div class="room-content">
+     <span class="room-badge">Suite</span>
+        <h3 class="room-title">Premium</h3>
+        <p class="room-description">Suite de luxe exceptionnelle avec deux chambres à coucher et deux salles de bain. Un espace VIP spacieux et élégant pour un séjour mémorable.</p>
+        <a href="chambre-premium.html" class="room-btn">Découvrir la chambre Premium</a>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="footer-bottom2">
+    <span class="footer-copy">© 2026 Luxury Hotel · Tous droits réservés</span>
+    <div class="footer-socials">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function tick(){cur.style.cssText=`left:${mx-4}px;top:${my-4}px;position:fixed;`;rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.cssText=`left:${rx-17}px;top:${ry-17}px;position:fixed;`;requestAnimationFrame(tick);})();
+    window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>10));
+    const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  
+  const observerOptions = {
+    threshold: 0.2 // L'animation se déclenche quand 20% de l'élément est visible
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('appear');
+      }
+    });
+  }, observerOptions);
+
+  // On cible tous les éléments .room-item
+  document.querySelectorAll('.room-item').forEach(item => {
+    observer.observe(item);
+  });
+  </script>
+</body>
+</html>

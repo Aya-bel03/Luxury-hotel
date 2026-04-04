@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chambre Premium - Luxury Hotel</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html"><img src="public/logo.png" alt="Luxury Hotel" class="navbar-logo"></a>
+      <a href="chambres.html" class="back-button" style="position:static;margin:0 0 0 24px;"><i class="fas fa-arrow-left"></i> Retour aux chambres</a>
+      <div class="navbar-spacer"></div>
+      <div class="navbar-menu">
+        <a href="index.html">Accueil</a>
+        <a href="services.html">Services</a>
+        <a href="chambres.html">Chambres</a>
+        <a href="contacter-nous.html">Contacter-nous</a>
+      </div>
+      <div class="navbar-spacer"></div>
+      <a class="reserve-btn"><i class="fas fa-phone"></i> Réserver</a>
+    </div>
+  </nav>
+
+  <section class="detail-section">
+    <div class="detail-content">
+      <h1>Chambre Premium</h1>
+      <p>Suite de luxe exceptionnelle avec deux chambres à coucher et deux salles de bain. Un espace VIP spacieux et élégant, offrant tout le confort et le raffinement pour un séjour mémorable. Décoration haut de gamme et équipements premium.</p>
+
+      <section class="room-gallery">
+        <h2 class="gallery-title">Découvrez les espaces de la suite</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="public/details-2.jpeg" alt="Cuisine équipée">
+            <div class="gallery-label">Cuisine équipée</div>
+          </div>
+          <div class="gallery-item">
+            <img src="public/defaultBcg.jpg" alt="Terrasse privée">
+            <div class="gallery-label">Terrasse privée</div>
+          </div>
+          <div class="gallery-item">
+            <img src="public/room-11.jpeg" alt="Salon VIP">
+            <div class="gallery-label">Salon VIP</div>
+          </div>
+          <div class="gallery-item">
+            <img src="public/defaultBcg.jpeg" alt="Vue panoramique">
+            <div class="gallery-label">Vue panoramique</div>
+          </div>
+        </div>
+      </section>
+
+      <p class="detail-price">À partir de 15 000 DZD / nuit</p>
+    </div>
+  </section>
+
+  <script>
+    const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function tick(){cur.style.cssText=`left:${mx-4}px;top:${my-4}px;position:fixed;`;rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.cssText=`left:${rx-17}px;top:${ry-17}px;position:fixed;`;requestAnimationFrame(tick);})();
+  </script>
+</body>
+</html>

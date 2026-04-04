@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace Vert - Luxury Hotel</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <nav class="navbar scrolled" id="navbar">
+    <div class="navbar-container">
+      <a href="index.html"><img src="public/logo.png" alt="Luxury Hotel" class="navbar-logo"></a>
+      <div class="navbar-spacer"></div>
+      <div class="navbar-menu">
+        <a href="index.html">Accueil</a><a href="services.html">Services</a>
+        <a href="chambres.html">Chambres</a><a href="contacter-nous.html">Contacter-nous</a>
+      </div>
+      <div class="navbar-spacer"></div>
+      <a class="reserve-btn"><i class="fas fa-phone"></i> Réserver</a>
+    </div>
+  </nav>
+  <main class="detail-page">
+    <div class="container">
+      <a href="services.html" class="back-button"><i class="fas fa-arrow-left"></i> Retour aux services</a>
+      <div class="detail-wrapper">
+        <div class="image-section">
+          <img src="public/Services/jardin.jpg" alt="Espace Vert" class="main-image">
+        </div>
+        <div class="content-section">
+          <span class="category-tag">Sérénité & Nature</span>
+          <h1>Espace Vert</h1>
+          <div class="divider"></div>
+          <p class="description">Offrez-vous un moment de pur apaisement dans nos jardins paysagers. Conçus comme un havre de paix, nos espaces verts offrent une vue imprenable où la famille peut se détendre, lire un livre ou simplement profiter du chant des oiseaux.</p>
+          <ul class="info-list">
+            <li><i class="fas fa-leaf"></i> Jardins botaniques entretenus</li>
+<li><i class="fas fa-couch"></i> Zones de repos avec mobilier de luxe</li>
+<li><i class="fas fa-child"></i> Aires de jeux discrètes pour enfants</li>
+<li><i class="fas fa-camera"></i> Spots photos avec vue panoramique</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+    (function tick(){cur.style.cssText=`left:${mx-4}px;top:${my-4}px;position:fixed;`;rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.cssText=`left:${rx-17}px;top:${ry-17}px;position:fixed;`;requestAnimationFrame(tick);})();
+  </script>
+</body>
+</html>
