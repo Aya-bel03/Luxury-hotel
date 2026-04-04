@@ -8,9 +8,9 @@ Bienvenue sur le dépôt officiel du projet **Luxury Hotel**. Ce site vitrine a 
 ## ✨ Points Forts du Projet
 
 * **Design Raffiné :** Utilisation d'une palette de couleurs "Gold & Dark" pour un aspect prestigieux.
-* **Expérience Mobile (iPhone 11) :** Interface entièrement responsive avec des ajustements spécifiques pour les petits écrans (900px et moins).
+* **Expérience Mobile :** Interface entièrement responsive avec des ajustements spécifiques pour les petits écrans (900px et moins).
 * **Animations Interactives :** Intégration de **Scroll Reveal** avec Intersection Observer pour une apparition fluide des éléments.
-* **Mode Sombre (Dark Mode) :** Toggle interactif pour basculer entre une ambiance lumineuse et une esthétique de nuit.
+
 * **Architecture Propre :** Séparation claire entre le HTML structurel, le CSS stylisé et le JavaScript dynamique.
 
 ---
