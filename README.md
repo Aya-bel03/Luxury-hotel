@@ -1,5 +1,6 @@
 # 🏨 Luxury Hotel - Algiers 🇩🇿
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)
+
 Bienvenue sur le dépôt officiel du projet **Luxury Hotel**. Ce site vitrine a été conçu pour offrir une expérience utilisateur haut de gamme, reflétant le prestige d'un établissement hôtelier de luxe situé au cœur de la capitale algérienne.
 
 ---
@@ -35,10 +36,3 @@ Bienvenue sur le dépôt officiel du projet **Luxury Hotel**. Ce site vitrine a 
 
 ---
 
-## 🚀 Installation & Utilisation
-
-Pour tester le projet localement :
-
-1. **Cloner le projet :**
-   ```bash
-   git clone [git clone https://github.com/aya-bel03/Luxury-hotel.git]
